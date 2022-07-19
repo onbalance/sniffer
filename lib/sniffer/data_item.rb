@@ -88,7 +88,7 @@ module Sniffer
           end
 
           hash[:method] = method if log_settings["request_method"]
-          hash[:request_body] = body.to_s if log_settings["request_body"]
+          hash[:request_body] = body.to_s.dup.force_encoding("UTF-8") if log_settings["request_body"]
         end
       end
     end
@@ -124,7 +124,7 @@ module Sniffer
           end
 
           hash[:timing] = timing if log_settings["timing"]
-          hash[:response_body] = body.to_s if log_settings["response_body"]
+          hash[:response_body] = body.to_s.dup.force_encoding("UTF-8") if log_settings["response_body"]
         end
       end
       # rubocop:enable Metrics/AbcSize
